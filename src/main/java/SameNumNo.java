@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//같은 숫자는 싫어 프로그래머스
+//같은 숫자는 싫어 프로그래머스lv1
 public class SameNumNo {
     public int[] solution(int[] arr) {
         int[] answer = {};
