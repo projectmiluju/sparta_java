@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 //같은 숫자는 싫어 프로그래머스lv1
-public class SameNumNo {
+public class SameNumNo {  //커밋 테스트중
     public int[] solution(int[] arr) {
         int[] answer = {};
         ArrayList<Integer> list = new ArrayList<Integer>();
