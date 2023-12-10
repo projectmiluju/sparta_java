@@ -11,7 +11,7 @@ public class Algo1 {
                 if (i % j == 0) cnt ++;
             }
 
-            if (cnt % 2 == 0) answer += 1;
+            if (cnt % 2 == 0) answer += i;
             else answer -= i;
 
         }
