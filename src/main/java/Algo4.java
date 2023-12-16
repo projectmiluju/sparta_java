@@ -2,15 +2,15 @@ public class Algo4 {
     public int solution(String t, String p){
         int answer  = 0;
         if (t.length() <= p.length()){
-            if (Integer.parseInt(t) <= Integer.parseInt(p)){
+            if (Long.parseLong(t) <= Long.parseLong(p)){
                 answer = 1;
             }
         }
         else {
-            for (int i = 0; i < t.length(); i++){
+            for (int i = 0; i < t.length()-p.length()+1; i++){
                 String str = t.substring(i,p.length()+i);
-                if (Integer.parseInt(str) <= Integer.parseInt(p)){
-                    answer += 1;
+                if (Long.parseLong(str) <= Long.parseLong(p)){
+                    answer ++ ;
                 }
             }
         }
