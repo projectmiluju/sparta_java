@@ -1,5 +1,6 @@
 package level1;
 
+// 다시 풀것
 import java.util.Arrays;
 public class Algo12 {
     public String[] solution(int n, int[] arr1, int[] arr2) {
