@@ -2,7 +2,6 @@ package level1;
 
 public class Algo21 {
     public int solution(int number, int limit, int power) {
-        int answer = 0;
         return answer;
     }
 
