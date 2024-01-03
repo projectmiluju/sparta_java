@@ -3,6 +3,14 @@ package level1;
 public class Algo24 {
     public int solution(int n, int m, int[] section) {
         int answer = 0;
+        int index = 0;
+
+        for (int i : section){
+            if (i > index){
+                answer++;
+                index = i + m - 1;
+            }
+        }
         return answer;
     }
 
