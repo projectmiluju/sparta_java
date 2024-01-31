@@ -4,6 +4,7 @@ package level3;
 public class Algo1 {
     public int solution(int[][] triangle) {
         int answer = 0;
+
         return answer;
     }
 
