@@ -1,4 +1,5 @@
 package level3;
+//동적계획법
 
 public class Algo1 {
     public int solution(int[][] triangle) {
