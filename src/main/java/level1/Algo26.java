@@ -5,6 +5,23 @@ import java.util.Arrays;
 public class Algo26 {
     public int[] solution(int[] lottos, int[] win_nums) {
         int[] answer = {};
+        int num = 0;
+        int zero = 0;
+        for (int i = 0; i < win_nums.length; i++){
+            for (int j = 0; j < lottos.length; j ++){
+                if(win_nums[i] == lottos[j]){
+                    num ++;
+                }
+            }
+            if (lottos[i] == 0){
+                zero ++;
+            }
+        }
+        if (num == 0){
+            answer = new int[]{1, 6};
+        } else if (num == 6) {
+            answer = new int[]{1, 1};
+        } else answer = new int[]{7-num-zero, 7-num};
         return answer;
     }
 
