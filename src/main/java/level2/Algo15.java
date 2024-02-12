@@ -3,6 +3,7 @@ package level2;
 public class Algo15 {
     public int solution(String[][] clothes) {
         int answer = 0;
+
         return answer;
     }
 
