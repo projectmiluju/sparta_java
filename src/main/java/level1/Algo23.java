@@ -13,6 +13,7 @@ public class Algo23 {
 
     private boolean isPrime(int num) {
         for (int i = 2; i<= (int)Math.sqrt(num); i++){
+            // Math.sqrt
             if (num % i == 0){
                 return false;
             }
