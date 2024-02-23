@@ -2,7 +2,7 @@ package level2;
 
 import java.util.Arrays;
 
-public class Alog20 {
+public class Algo20 {
     public int solution(int[] citations) {
         int answer = 0;
         Arrays.sort(citations); // 0, 1, 4, 4, 5, 6, 7
@@ -18,7 +18,7 @@ public class Alog20 {
     }
 
     public static void main(String[] args) {
-        Alog20 algo = new Alog20();
+        Algo20 algo = new Algo20();
 
         int[] citations = {4, 0, 6, 1, 5, 7, 4};
 //        int[] citations = {0,0,0};
