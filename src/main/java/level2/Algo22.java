@@ -16,13 +16,15 @@ public class Algo22 {
             return "0";
         }
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
 
-        for (int i = 0; i < arr.length; i++){
-            answer += arr[i];
+        for (int i = 0; i < arr.length; i++) {
+            answer.append(arr[i]);
         }
 
-        return answer;
+
+        return answer.toString();
+
     }
 
     public static void main(String[] args) {
