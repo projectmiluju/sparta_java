@@ -2,85 +2,19 @@ package level2;
 
 public class Algo26 {
     public String solution(int n) {
-        StringBuilder sol = new StringBuilder();
-        int a = n / 3;
-        int b = n % 3;
-        if (n == 1){
-            sol.append("1");
-            return sol.toString();
-        }
-        if (n == 2){
-            sol.append("2");
-            return sol.toString();
-        }
-        if (n == 3){
-            sol.append("4");
-            return sol.toString();
+        String answer = "";
+        String[] numbers = {"4", "1", "2"};
 
-        }else {
-//            while (a >= 0) {
-//                if (b == 0) {
-//                    answer += "4";
-//                    if (a == 2) {
-//                        return answer + "1";
-//                    }
-//                    if (a == 3) {
-//                        return answer + "2";
-//                    }
-//                    a = (a / 3) - 1;
-//                    b = a % 3;
-//                } else {
-//                    answer += Integer.toString(b);
-//                    if (a == 1){
-//                        return answer + "1";}
-//                    if (a == 2) {
-//                        return answer + "2";
-//                    }
-//                    if (a == 3) {
-//                        return answer + "4";
-//                    }
-//                    a = a / 3;
-//                    b = a % 3;
-//                }
-            while (a >= 0) {
-                if (b == 0) {
-                    sol.append("4");
-                    if (a == 2) {
-                        sol.append("1");
-                        StringBuilder sb = new StringBuilder(sol.toString());
-                        return sb.reverse().toString();
-                    }
-                    if (a == 3) {
-                        sol.append("2");
-                        StringBuilder sb = new StringBuilder(sol.toString());
-                        return sb.reverse().toString();
-                    }
-                    a = (a / 3) - 1;
-                    b = a % 3;
-                } else {
-                    sol.append(b);
-                    if (a == 1){
-                        sol.append("1");
-                        StringBuilder sb = new StringBuilder(sol.toString());
-                        return sb.reverse().toString();
-                    }
-                    if (a == 2) {
-                        sol.append("2");
-                        StringBuilder sb = new StringBuilder(sol.toString());
-                        return sb.reverse().toString();
-                    }
-                    if (a == 3) {
-                        sol.append("4");
-                        StringBuilder sb = new StringBuilder(sol.toString());
-                        return sb.reverse().toString();
-                    }
-                    a = a / 3;
-                    b = a % 3;
-                }
-            }
+        int num = n;
+
+        while (num > 0){
+            int a = num % 3;
+            num = num / 3;
+            if (a == 0) num--;
+
+            answer = numbers[a] + answer;
         }
-        StringBuilder sb = new StringBuilder(sol.toString());
-        return sb.reverse().toString();
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -97,7 +31,12 @@ public class Algo26 {
         System.out.println(algo.solution(10)); //41
         System.out.println(algo.solution(11)); //42
         System.out.println(algo.solution(12)); //44
-        System.out.println(algo.solution(15)); //111
+        System.out.println(algo.solution(13)); //111
+        System.out.println(algo.solution(14)); //112
+        System.out.println(algo.solution(15)); //114
+        System.out.println(algo.solution(16)); //121
+
+
 
 
     }
