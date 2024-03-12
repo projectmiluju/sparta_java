@@ -1,11 +1,35 @@
 package level3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Algo2 {
 
     public int[] solution(String[] operations) {
-        int[] answer = {};
+        int[] answer = new int[2];
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < operations.length; i++) {
+            if (operations[i].contains("I")){
+                   arr.add(Integer.parseInt(operations[i].substring(2)));
+            } else if (operations[i].contains("D") && !arr.isEmpty()) {
+                if (operations[i].contains("-")){
+                    Collections.sort(arr);
+                    arr.remove(0);
+                } else {
+                    arr.sort(Collections.reverseOrder());
+                    arr.remove(0);
+                }
+            }
+        }
+        if (!arr.isEmpty()) {
+            arr.sort(Collections.reverseOrder());
+            answer[0] = arr.get(0);
+            answer[1] = arr.get(arr.size() - 1);
+        } else {
+            answer[0] = 0;
+            answer[1] = 0;
+        }
         return answer;
     }
 
