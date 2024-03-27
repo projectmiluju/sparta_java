@@ -3,12 +3,49 @@ package level2;
 public class Algo28 {
 
     public String solution(String p) {
-        String answer = "";
 
-        if (p.isEmpty()) return ""; // 1. 입력이 빈 문자열인 경우, 빈 문자열을 반환합니다.
+        if (p.isEmpty()) return p;
 
+        int left = 0;
+        int right = 0;
+        int index = 0;
+        for (int i = 0; i<p.length(); i++) {
+            if (p.charAt(i) == '(') {
+                left++;
+            }else{
+                right++;
+            }
+            if (left == right) {
+                index = i;
+                break;
+            }
+        }
 
-        return answer;
+        String u = p.substring(0, index+1);
+        String v = p.substring(index+1);
+
+        left = 0;
+        right = 0;
+        for (int i = 0; i < u.length(); i++) {
+            if (u.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (right > left) {
+                StringBuilder sb = new StringBuilder();
+                for (int j = 1; j < u.length() - 1; j++) {
+                    if (u.charAt(j) == '(') {
+                        sb.append(')');
+                    } else {
+                        sb.append('(');
+                    }
+                }
+
+                return "(" + solution(v) + ")" + sb;
+            }
+        }
+        return u + solution(v);
     }
 
     public static void main(String[] args) {
