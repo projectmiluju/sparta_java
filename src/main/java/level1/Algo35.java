@@ -1,8 +1,26 @@
 package level1;
 
+import java.util.LinkedList;
+
 public class Algo35 {
     public int solution(int cacheSize, String[] cities) {
+        if (cacheSize == 0) return cities.length*5;
+
         int answer = 0;
+        LinkedList<String> queue = new LinkedList<>();
+        for (int i = 0; i < cities.length; i++) {
+            String s  = cities[i].toUpperCase();
+            if (queue.remove(s)){
+                answer += 1;
+                queue.add(s);
+            }else {
+                answer += 5;
+                if (queue.size() >= cacheSize) {
+                    queue.remove(0);
+                }
+                queue.add(s);
+            }
+        }
         return answer;
     }
 
