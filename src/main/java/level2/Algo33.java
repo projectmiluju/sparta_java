@@ -3,8 +3,39 @@ package level2;
 public class Algo33 {
 
     public int solution(String s) {
-        int answer = -1;
+        int answer = 0;
+        for (int i = 0; i < s.length()-1; i++) {
+            if (test(s)){
+                answer++;
+            }
+            s = s.substring(1) + s.charAt(0);
+        }
+
         return answer;
+    }
+
+    public boolean test(String s) {
+        String a = s;
+        if (a.length() % 2 != 0 ){
+            return false;
+        }
+        if (a.charAt(0) == ']' || a.charAt(0) == '}' || a.charAt(0) == ')'){
+            return false;
+        }
+        for (int i = 0; i < s.length()/2; i++) {
+            if (a.contains("[]")){
+                a = a.replace("[]", "");
+            }
+            if (a.contains("{}")){
+                a = a.replace("{}", "");
+            }
+            if (a.contains("()")){
+                a = a.replace("()", "");
+            }
+        }
+        if (a.isEmpty()) return true;
+
+        return false;
     }
 
     public static void main(String[] args) {
