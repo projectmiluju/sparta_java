@@ -1,34 +1,62 @@
 package level2;
 
-import java.util.Arrays;
-import java.util.Objects;
+
+import java.util.*;
 
 public class Algo39 {
+
+    static HashMap<String, List<Integer>> map;
+
     public int[] solution(String[] info, String[] query) {
         int[] answer = new int[query.length];
-        for (int i = 0; i < query.length; i++) {
-            int cnt = 0;
-            String s = query[i].replaceAll("and ","");
-            int point = Integer.parseInt(s.replaceAll("[^0-9]",""));
-            s = s.replaceAll("[0-9]","");
-            for (int j = 0; j < info.length; j++) {
-                if (Objects.equals(s.split(" ")[0], "-") || Objects.equals(s.split(" ")[0], info[j].split(" ")[0])) {
-                    if (Objects.equals(s.split(" ")[1], "-") || Objects.equals(s.split(" ")[1], info[j].split(" ")[1])){
-                        if (Objects.equals(s.split(" ")[2], "-") || Objects.equals(s.split(" ")[2], info[j].split(" ")[2])){
-                            if (Objects.equals(s.split(" ")[3], "-") || Objects.equals(s.split(" ")[3], info[j].split(" ")[3])){
-                                if(Integer.parseInt(info[j].split(" ")[4]) >= point){
-                                    cnt ++;
-                                }
-                            }
-                        }
+        map = new HashMap<>();
 
-                    }
-                }
-            }
-            answer[i] = cnt;
+        for (String s : info) {
+            String[] infoStr = s.split(" ");
+            infoCase(infoStr, "", 0);
+        }
+
+        for (String key : map.keySet()) {
+            Collections.sort(map.get(key));
+        }
+
+
+        for (int i = 0; i < query.length; i++) {
+            query[i] = query[i].replaceAll(" and ", "");
+            String[] queryStr = query[i].split(" ");
+
+            answer[i] = map.containsKey(queryStr[0]) ? binarySearch(queryStr[0], Integer.parseInt(queryStr[1])) : 0;
         }
 
         return answer;
+    }
+
+    public static int binarySearch(String key, int score) {
+        List<Integer> list = map.get(key);
+        int start = 0, end = list.size() - 1;
+
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (list.get(mid) < score) {
+                start = mid + 1;
+            }else {
+                end = mid - 1;
+            }
+        }
+        return list.size() - start;
+    }
+
+    public static void infoCase(String[] infoStr, String str, int cnt){
+        if (cnt == 4){
+            if (!map.containsKey(str)){
+                List<Integer> list = new ArrayList<>();
+                map.put(str, list);
+            }
+            map.get(str).add(Integer.parseInt(infoStr[4]));
+            return;
+        }
+        infoCase(infoStr, str + "-", cnt+1);
+        infoCase(infoStr, str + infoStr[cnt], cnt+1);
     }
 
     public static void main(String[] args) {
