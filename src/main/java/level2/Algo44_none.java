@@ -7,36 +7,37 @@ import java.util.HashMap;
 public class Algo44_none {
     public long solution(String expression) {
         long answer = 0;
-        String str = expression.replaceAll("[0-9]", "");
-        HashMap<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < str.length(); i++) {
-            map.put(str.charAt(i),0);
-        }
-
-        int index = factorial(map.size());
-
-        String str2 = expression.replaceAll("[*+-]"," ");
-        ArrayList<Long> list = new ArrayList<>();
-        for (int i = 0; i < str.length()+1; i++) {
-            list.add(Long.parseLong(str2.split(" ")[i]));
-        }
-
+//        String str = expression.replaceAll("[0-9]", "");
+//        HashMap<Character, Integer> map = new HashMap<>();
+//        for (int i = 0; i < str.length(); i++) {
+//            map.put(str.charAt(i),0);
+//        }
+//
+//        int index = factorial(map.size());
+//
+//        String str2 = expression.replaceAll("[*+-]"," ");
+//        ArrayList<Long> list = new ArrayList<>();
+//        for (int i = 0; i < str.length()+1; i++) {
+//            list.add(Long.parseLong(str2.split(" ")[i]));
+//        }
+//
+//        return answer;
+//    }
+//
+//    public int factorial(int n) {
+//        if (n == 1) return 1;
+//        return n * factorial(n - 1);
+//    }
+//
+//    public int cal(int index, long[] list, String str){
+//        if (index == 1){
+//            ArrayList<Long> list2 = new ArrayList<>();
+//            list2.add(list[0]);
+//            for (int i = 1; i < list.length; i++) {
+//                list2.add(list2[0]);
+//            }
+//        }
         return answer;
-    }
-
-    public int factorial(int n) {
-        if (n == 1) return 1;
-        return n * factorial(n - 1);
-    }
-
-    public int cal(int index, long[] list, String str){
-        if (index == 1){
-            ArrayList<Long> list2 = new ArrayList<>();
-            list2.add(list[0]);
-            for (int i = 1; i < list.length; i++) {
-                list2.add(list2[0]);
-            }
-        }
     }
 
     public static void main(String[] args) {
