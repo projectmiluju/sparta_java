@@ -4,12 +4,6 @@ public class Algo47 {
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
         long answer = 0;
 
-//        long deliveriesSum = 0;
-//        long pickupsSum = 0;
-//        for (int i = 0; i < deliveries.length; i++) {
-//            deliveriesSum += deliveries[i];
-//            pickupsSum += pickups[i];
-//        }
 
         int d = 0;
         int p = 0;
