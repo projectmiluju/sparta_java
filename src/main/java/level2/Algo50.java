@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Algo50 {
     public int[][] solution(int[][] arr1, int[][] arr2) {
-        int[][] answer = new int[arr1.length][arr1[0].length];
+        int[][] answer = new int[arr1.length][arr2[0].length];
 
         for(int i = 0 ; i < arr1.length ; i++){
             for(int j = 0 ; j < arr2[0].length ; j++){
@@ -13,7 +13,6 @@ public class Algo50 {
                 }
             }
         }
-
         return answer;
     }
 
