@@ -4,7 +4,21 @@ import java.util.Arrays;
 
 public class Algo52 {
     public int[] solution(int[] numbers) {
-        int[] answer = {};
+        int[] answer = new int[numbers.length];
+        for (int i = 0; i < numbers.length-1; i++) {
+            for (int j = i + 1; j < numbers.length; j++) {
+                if (numbers[i]<numbers[j]) {
+                    answer[i] = numbers[j];
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < answer.length; i++) {
+            if (answer[i] == 0) {
+                answer[i] = -1;
+            }
+        }
+        answer[numbers.length-1] = -1;
         return answer;
     }
 
