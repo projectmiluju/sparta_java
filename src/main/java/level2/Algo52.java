@@ -1,24 +1,26 @@
 package level2;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Algo52 {
     public int[] solution(int[] numbers) {
         int[] answer = new int[numbers.length];
-        for (int i = 0; i < numbers.length-1; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-                if (numbers[i]<numbers[j]) {
-                    answer[i] = numbers[j];
-                    break;
-                }
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(0); //첫번째 인덱스 값
+        for(int i=1; i<numbers.length; i++) {
+            while(!stack.empty() && numbers[stack.peek()] < numbers[i]) {
+                answer[stack.pop()] = numbers[i];
             }
+            stack.push(i); //다음 인덱스 값을 넣어줌
         }
-        for (int i = 0; i < answer.length; i++) {
-            if (answer[i] == 0) {
-                answer[i] = -1;
-            }
+
+        // stack에 남은 인덱스 값들 = -1
+        while(!stack.empty()) {
+            answer[stack.pop()] = -1;
         }
-        answer[numbers.length-1] = -1;
+
         return answer;
     }
 
