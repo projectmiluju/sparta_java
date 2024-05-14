@@ -1,13 +1,14 @@
 package level2;
 
-public class Algo54 {
+public class Algo54_none {
     public int solution(String dirs) {
         int answer = 0;
+
         return answer;
     }
 
     public static void main(String[] args) {
-        Algo54 algo54 = new Algo54();
+        Algo54_none algo54 = new Algo54_none();
 
         String dir1 = "ULURRDLLU";
         int res1 = 7;
