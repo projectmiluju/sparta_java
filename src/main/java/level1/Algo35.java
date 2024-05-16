@@ -15,6 +15,10 @@ public class Algo35 {
                         }
                     }
                 }
+                if (sum == -1) {
+                    answer[i] = -1;
+                    break;
+                }
                 answer[i] += sum;
             }
         }
