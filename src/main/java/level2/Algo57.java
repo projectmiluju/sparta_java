@@ -3,7 +3,11 @@ package level2;
 public class Algo57 {
     public int solution(int[] elements) {
         int answer = 0;
+        
+        // 증복 제거 원소 개수 총합 구하기
+        // elements의 길이만큼
         return answer;
+
     }
 
     public static void main(String[] args) {
