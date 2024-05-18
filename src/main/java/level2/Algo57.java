@@ -6,7 +6,6 @@ public class Algo57 {
 
     static HashMap<Integer,Integer> map;
     public int solution(int[] elements) {
-        int answer = 0;
         // 증복 제거 원소 개수 총합 구하기
         // elements의 길이만큼
         map = new HashMap<>();
@@ -14,8 +13,7 @@ public class Algo57 {
             int n = i+1;
             elementSum(n,elements);
         }
-        answer = map.size();
-        return answer;
+        return map.size();
     }
 
     private void elementSum(int n, int[] elements){
