@@ -1,8 +1,41 @@
 package level2;
 
+
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Algo61 {
     public int solution(String[][] book_time) {
         int answer = 0;
+
+        //분으로 통일해 정수배열로 변경
+        int[][] time = changeMin(book_time);
+
+        //0번째 인덱스를 기준으로 오름차순 정렬
+        Arrays.sort(time, Comparator.comparingInt(a -> a[0]));
+
+        int[] arr = new int[1440];
+        for (int i = 0; i < time.length; i++){
+            int start = time[i][0];
+            int end = Math.min(1439, time[i][1]+10);
+            for (int j = start; j < end; j++){
+                arr[j]++;
+            }
+        }
+        for (int i = 0; i < 1440; i++){
+            answer = Math.max(answer, arr[i]);
+        }
+        return answer;
+    }
+
+    public static int[][] changeMin(String[][] book_time) {
+        int[][] answer = new int[book_time.length][book_time[0].length];
+
+        for (int i = 0; i < book_time.length; i++){
+            answer[i][0] = Integer.parseInt(book_time[i][0].split(":")[0])*60 + Integer.parseInt(book_time[i][0].split(":")[1]);
+            answer[i][1] = Integer.parseInt(book_time[i][1].split(":")[0])*60 + Integer.parseInt(book_time[i][1].split(":")[1]);
+        }
+
         return answer;
     }
 
