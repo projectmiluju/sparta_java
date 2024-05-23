@@ -1,13 +1,17 @@
 package level2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Algo60 {
     public int solution(int[] arrayA, int[] arrayB) {
         int answer = 0;
 
+        // 내림차순 정렬
         Arrays.sort(arrayA);
         int a = 0;
+        //최대공약수 구하기
         if (arrayA.length == 1) {
             a = arrayA[0];
         } else {
@@ -16,12 +20,31 @@ public class Algo60 {
                 a = gcd(a, arrayA[i-1]);
             }
         }
-        for (int i = 0; i < arrayB.length; i++){
-            if (arrayB[i] % a == 0) {
-                a = 0;
-                break;
+        //최대공약수의 약수 구하기
+        ArrayList<Integer> listA = new ArrayList<>();
+        if (a != 0 || a != 1){
+            for (int i = 1; i <= a; i++){
+                if (a % i == 0) {
+                    listA.add(i);
+                }
             }
         }
+        listA.sort(Comparator.reverseOrder());
+
+        //A의 약수 중 B의 모든 수를 나누지 않는 가장 큰수 구하기
+        int cntA = 0;
+        for (int i = 0; i < arrayB.length; i++){
+            for (int j = cntA; j < listA.size(); j++){
+                if (arrayB[i] % listA.get(j) == 0){
+                    a = 0;
+                    cntA++;
+                }else {
+                    a = listA.get(j);
+                    break;
+                }
+            }
+        }
+
 
 
         Arrays.sort(arrayB);
@@ -34,10 +57,27 @@ public class Algo60 {
                 b = gcd(b, arrayB[i-1]);
             }
         }
-        for (int i = 0; i < arrayB.length; i++){
-            if (arrayB[i] % b == 0) {
-                b = 0;
-                break;
+        ArrayList<Integer> listB = new ArrayList<>();
+        if (b != 0 || b != 1){
+            for (int i = 1; i <= b; i++){
+                if (b % i == 0) {
+                    listB.add(i);
+                }
+            }
+        }
+
+        listB.sort(Comparator.reverseOrder());
+
+        int cntB = 0;
+        for (int i = 0; i < arrayA.length; i++){
+            for (int j = cntB; j < listB.size(); j++){
+                if (arrayA[i] % listB.get(j) == 0){
+                    b = 0;
+                    cntB++;
+                }else {
+                    b = listB.get(j);
+                    break;
+                }
             }
         }
         answer = Math.max(a, b);
