@@ -1,16 +1,38 @@
 package level3;
 
+import java.util.Collections;
+import java.util.PriorityQueue;
+
 public class Algo4 {
 
     public long solution(int n, int[] works) {
-        long answer = 0;
-        return answer;
+        PriorityQueue<Integer> overTime = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int i = 0; i < works.length; i++){
+            overTime.add(works[i]);
+        }
+
+        for (int i = 0; i < n; i++){
+            int max = (int)overTime.poll();
+            if (max <= 0) break;
+            overTime.offer(max -1);
+        }
+
+        return sum(overTime);
+    }
+
+    public static long sum(PriorityQueue<Integer> works) {
+        long sum = 0;
+        while (!works.isEmpty()) {
+            sum += (long) Math.pow(works.poll(), 2);
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
         Algo4 algo4 = new Algo4();
 
-        int[] works1 = new int[]{4, 3, 4};
+        int[] works1 = new int[]{4, 3, 3};
         int a = 4;
         long res1 = 12;
         long ans1 = algo4.solution(a, works1);
