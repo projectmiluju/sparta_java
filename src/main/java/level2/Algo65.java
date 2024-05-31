@@ -41,7 +41,7 @@ public class Algo65 {
 //        return answer;
 //    }
 
-    public static long[] solution(long[] numbers) {
+    public long[] solution(long[] numbers) {
         long[] answer = numbers.clone();
         for (int i = 0; i < numbers.length; i++) {
             answer[i]++; // x보다 큰수로 만든다.
