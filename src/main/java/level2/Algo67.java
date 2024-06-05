@@ -3,6 +3,23 @@ package level2;
 public class Algo67 {
     public String solution(int n, int t, int m, int p) {
         String answer = "";
+
+        StringBuilder sb = new StringBuilder();
+        //n진수로 변경
+        for (int i = 0; i <= t*m; i++) {
+            String a = Integer.toUnsignedString(i,n);
+            sb.append(a);
+        }
+        StringBuilder sbSplit = new StringBuilder();
+        for (int i = 0; i < sb.length();) {
+            for (int j = 1 ; j <= m ; j++) {
+                if (j == p){
+                    sbSplit.append(sb.charAt(i));
+                }
+                i++;
+            }
+        }
+        answer = sbSplit.substring(0,t).toUpperCase();
         return answer;
     }
 
