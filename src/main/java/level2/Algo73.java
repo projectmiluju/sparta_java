@@ -19,7 +19,6 @@ public class Algo73 {
         }
     }
     public int solution(String[] board) {
-        int answer = 0;
 
         n = board.length;
         m = board[0].length();
@@ -41,9 +40,7 @@ public class Algo73 {
             }
         }
 
-        answer = bfs(board, robot, goal);
-
-        return answer;
+        return bfs(board, robot, goal);
     }
     private int bfs(String[] board, Moving robot, Moving goal) {
         Queue<Moving> qu = new LinkedList<>();
