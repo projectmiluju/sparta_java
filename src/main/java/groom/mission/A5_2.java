@@ -16,11 +16,12 @@ public class A5_2 {
 
         int N = Integer.parseInt(br.readLine());
 
-        int[][] arr2 = new int[N][2];
+        int[] x = new int[N];
+        int[] y = new int[N];
         for (int i = 0; i < N; i++) {
             str = br.readLine();
-            arr2[i][0] = Integer.parseInt(str.split(" ")[0]);
-            arr2[i][1] = Integer.parseInt(str.split(" ")[1]);
+            x[i] = Integer.parseInt(str.split(" ")[0]);
+            y[i] = Integer.parseInt(str.split(" ")[1]);
         }
 
         int Q = Integer.parseInt(br.readLine());
@@ -31,7 +32,7 @@ public class A5_2 {
             if (Objects.equals(str2.split(" ")[i], "L")) {
                 boolean flag = true;
                 for (int j = 0; j < N; j++) {
-                    if(arr2[j][0] == arr1[0]-1 && arr2[j][1] == arr1[1]){
+                    if(x[j] == arr1[0]-1 && y[j] == arr1[1]) {
                         flag = false;
                         break;
                     }
@@ -42,7 +43,7 @@ public class A5_2 {
             } else if (Objects.equals(str2.split(" ")[i], "R")) {
                 boolean flag = true;
                 for (int j = 0; j < N; j++) {
-                    if(arr2[j][0] == arr1[0]+1 && arr2[j][1] == arr1[1]){
+                    if(x[j] == arr1[0]+1 && y[j] == arr1[1]){
                         flag = false;
                         break;
                     }
@@ -53,7 +54,7 @@ public class A5_2 {
             } else if (Objects.equals(str2.split(" ")[i], "U")) {
                 boolean flag = true;
                 for (int j = 0; j < N; j++) {
-                    if(arr2[j][0] == arr1[0] && arr2[j][1] == arr1[1]+1){
+                    if(x[j] == arr1[0] && y[j] == arr1[1]+1){
                         flag = false;
                         break;
                     }
@@ -64,7 +65,7 @@ public class A5_2 {
             } else if (Objects.equals(str2.split("")[i], "D")) {
                 boolean flag = true;
                 for (int j = 0; j < N; j++) {
-                    if(arr2[j][0] == arr1[0] && arr2[j][1] == arr1[1]-1){
+                    if(x[j] == arr1[0]-1 && y[j] == arr1[1]-1){
                         flag = false;
                         break;
                     }
