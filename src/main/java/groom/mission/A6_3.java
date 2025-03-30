@@ -3,17 +3,17 @@ package groom.mission;
 import java.util.*;
 public class A6_3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int[] goormPos = {scanner.nextInt() - 1, scanner.nextInt() - 1};
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] goormPos = {sc.nextInt() - 1, sc.nextInt() - 1};
         boolean[][] goormVisited = new boolean[N][N];
-        int[] playerPos = {scanner.nextInt() - 1, scanner.nextInt() - 1};
+        int[] playerPos = {sc.nextInt() - 1, sc.nextInt() - 1};
         boolean[][] playerVisited = new boolean[N][N];
 
         String[][] board = new String[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                board[i][j] = scanner.next();
+                board[i][j] = sc.next();
             }
         }
 
@@ -25,7 +25,7 @@ public class A6_3 {
         } else if (goormScore < playerScore) {
             System.out.println("player " + playerScore);
         }
-        scanner.close();
+        sc.close();
     }
 
 
@@ -35,7 +35,7 @@ public class A6_3 {
         return a;
     }
 
-    static HashMap<String, int[]> directions = new HashMap<String, int[]>() {
+    static HashMap<String, int[]> directions = new HashMap<>() {
         {
             put("U", new int[]{-1, 0});
             put("D", new int[]{1, 0});
