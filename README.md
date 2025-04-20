@@ -4,14 +4,14 @@
 1. 입출력 (Input & Output) <br>
 
     ✅ 기본 출력 (print)
-    ```angular2html
+    ```java
         System.out.println("Hello, World!");  // 줄바꿈 포함 출력
         System.out.print("Hello ");           // 줄바꿈 없이 출력
         System.out.printf("숫자: %d\n", 10);   // 형식 지정 출력
     ```
 
     ✅ 기본 입력 (Scanner 사용)
-    ```angular2html
+    ```java
         import java.util.Scanner;  // Scanner 가져오기
 
         public class Main {
@@ -28,7 +28,7 @@
         }
     ```
    ✅ 기본 입력 (BufferReader 사용)
-    ```angular2html
+    ```java
         import java.io.BufferedReader; // BufferedReader 가져오기
         import java.io.InputStreamReader;
 
@@ -51,7 +51,7 @@
    - 예외 처리를 위해 throw Exception 필요
 
 2. 변수와 데이터 타입
-   ```angular2html
+   ```java
         int num = 10;       // 정수
         double pi = 3.14;   // 실수
         boolean flag = true;// 참/거짓
@@ -64,7 +64,7 @@
 3. 조건문(if, switch)
 
    ✅ if-else 문
-    ```angular2html
+    ```java
         int x = 10;
         if (x > 0) {
             System.out.println("양수");
@@ -76,7 +76,7 @@
     ```
    
     ✅ switch 문
-    ```angular2html
+    ```java
     int num = 2;
     switch (num) {
         case 1:
@@ -94,14 +94,14 @@
 4. 반복문(for,while)
 
    ✅ for 문 (반복 횟수 지정)
-    ```angular2html
+    ```java
     for (int i = 1; i <= 5; i++) {
         System.out.println("반복: " + i);
     }
     ```
 
    ✅ while 문 (조건 만족 시 반복 )
-    ```angular2html
+    ```java
     int i = 1;
     while (i <= 5) {
         System.out.println("while 반복: " + i);
@@ -112,7 +112,7 @@
 5. 배열과 리스트
 
    ✅ 배열(고정된 크기)
-    ```angular2html
+    ```java
     int[] arr = {1, 2, 3, 4, 5};
     System.out.println(arr[0]); // 첫 번째 요소 출력
     
@@ -121,7 +121,7 @@
     }
     ```
    ✅ 리스트(가변 크기 - ArrayList)
-    ```angular2html
+    ```java
     import java.util.ArrayList;
     public class Main {
         public static void main(String[] args) {
@@ -138,7 +138,7 @@
     ```
    
 6. 문자열 다루기
-   ```angular2html
+   ```java
    String s = "Hello, Java!";
    System.out.println(s.length());       // 문자열 길이
    System.out.println(s.charAt(0));      // 특정 문자 가져오기
@@ -151,7 +151,7 @@
 7. 함수(메서드)
 
    ✅ 기본 메서드
-   ```angular2html
+   ```java
    public class Main {
     public static void main(String[] args) {
         sayHello(); // 함수 호출
@@ -172,7 +172,7 @@
    ```
    
 8. 정렬 (오름차순 정렬)
-   ```angular2html
+   ```java
    import java.util.Arrays;
    public class Main {
         public static void main(String[] args) {
@@ -185,7 +185,7 @@
    ```
    
 9. 기본적인 수학 연산
-   ```angular2html
+   ```java
    import java.util.Arrays;
    public class Main {
         public static void main(String[] args) {
