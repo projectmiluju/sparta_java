@@ -17,4 +17,5 @@ public class A12_1 {
             int b = Integer.parseInt(input[1]);
         }
     }
+
 }
