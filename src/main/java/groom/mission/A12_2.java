@@ -1,56 +1,71 @@
 package groom.mission;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class A12_2 {
-    static int[] parent;
+    static int[] parent, rank;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
 
-        while (t --> 0) {
-            int n = sc.nextInt();
-            int m = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
 
-            int[][] edges = new int[m][2];
-
-            for (int i = 0; i < m; i++) {
-                edges[i][0] = sc.nextInt();
-                edges[i][1] = sc.nextInt();
-            }
+        while (t-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
 
             parent = new int[n + 1];
+            rank = new int[n + 1];
             for (int i = 1; i <= n; i++) {
                 parent[i] = i;
+                rank[i] = 0;
             }
 
             int edgeCount = 0;
 
             for (int i = 0; i < m; i++) {
-                int a = edges[i][0];
-                int b = edges[i][1];
+                st = new StringTokenizer(br.readLine());
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+
                 if (union(a, b)) {
                     edgeCount++;
-                    if (edgeCount == n - 1) break;
+                    if (edgeCount == n - 1) {
+                        for (int j = i + 1; j < m; j++) br.readLine();
+                        break;
+                    }
                 }
             }
 
-            System.out.println(edgeCount);
+            sb.append(edgeCount).append("\n");
         }
+
+        System.out.print(sb);
     }
 
     static int find(int x) {
-        if (parent[x] != x)
-            parent[x] = find(parent[x]);
+        if (x != parent[x]) parent[x] = find(parent[x]);
         return parent[x];
     }
 
-    static boolean union(int a, int b) {
-        int rootA = find(a);
-        int rootB = find(b);
-        if (rootA == rootB) return false;
-        parent[rootB] = rootA;
+    static boolean union(int x, int y) {
+        int px = find(x);
+        int py = find(y);
+        if (px == py) return false;
+
+        // rank 기준 병합
+        if (rank[px] < rank[py]) {
+            parent[px] = py;
+        } else {
+            parent[py] = px;
+            if (rank[px] == rank[py]) rank[px]++;
+        }
+
         return true;
     }
 }
