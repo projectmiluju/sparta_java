@@ -32,7 +32,6 @@ public class A12_1 {
             int a = wires[i][0];
             int b = wires[i][1];
 
-            // 해당 전선만 끊는 시뮬레이션
             connectionCount[a]--;
             connectionCount[b]--;
 
