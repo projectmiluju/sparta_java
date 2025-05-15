@@ -3,135 +3,82 @@ package groom.mission;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class A13_2 {
-    static class Point {
-        int x, y;
-        Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
+    static final int MAX = 1000;
+    static final int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 상하좌우 방향
     static int R, C;
-    static char[][] map;
-    static int[][] fireTime;  // 불 도달 시간
-    static int[][] goormTime; // 구름이 도달 시간
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
-    static Queue<Point> fireQ = new LinkedList<>();
-    static Queue<Point> goormQ = new LinkedList<>();
-    static Point start;
+    static int[][] dist = new int[MAX][MAX];
+    static boolean[][] visited = new boolean[MAX][MAX];
+    static String[] S = new String[MAX];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        R = Integer.parseInt(st.nextToken());
-        C = Integer.parseInt(st.nextToken());
 
-        map = new char[R][C];
-        fireTime = new int[R][C];
-        goormTime = new int[R][C];
+        // R과 C 입력 받기
+        String[] input = br.readLine().split(" ");
+        R = Integer.parseInt(input[0]);
+        C = Integer.parseInt(input[1]);
 
-        // 초기화
+        // 지도 정보 입력 받기
         for (int i = 0; i < R; i++) {
-            Arrays.fill(fireTime[i], Integer.MAX_VALUE);
-            Arrays.fill(goormTime[i], -1);
+            S[i] = br.readLine();
         }
 
-        // 맵 입력 및 시작점 설정
+        // BFS를 위한 덱 선언
+        Deque<int[]> dq = new ArrayDeque<>();
+
+        // 불의 위치를 먼저 모두 덱에 담는다.
         for (int i = 0; i < R; i++) {
-            String line = br.readLine();
             for (int j = 0; j < C; j++) {
-                map[i][j] = line.charAt(j);
-                if (map[i][j] == 'a') {      // 불 시작점
-                    fireQ.add(new Point(i, j));
-                    fireTime[i][j] = 0;
-                } else if (map[i][j] == '&') { // 구름이 시작점
-                    start = new Point(i, j);
-                    goormTime[i][j] = 0;
+                if (S[i].charAt(j) == '@') { // 불인 칸
+                    dq.add(new int[]{i, j});
+                    dist[i][j] = 0;
+                    visited[i][j] = true;
                 }
             }
         }
 
-        // 불 확산 BFS
-        spreadFire();
+        // BFS 시작 (불이 확산되는 과정)
+        while (!dq.isEmpty()) {
+            int[] current = dq.pollFirst(); // 덱에서 현재 위치 꺼냄
+            int i = current[0];
+            int j = current[1];
 
-        // 구름이 탈출 BFS
-        int result = escapeGoorm();
+            // 사방으로 확장
+            for (int[] d : dir) {
+                int ni = i + d[0];
+                int nj = j + d[1];
 
-        System.out.println(result);
-    }
-
-    // 불 확산 BFS
-    static void spreadFire() {
-        while (!fireQ.isEmpty()) {
-            Point cur = fireQ.poll();
-
-            for (int d = 0; d < 4; d++) {
-                int nx = cur.x + dx[d];
-                int ny = cur.y + dy[d];
-
-                if (nx < 0 || nx >= R || ny < 0 || ny >= C) continue;
-                if (map[nx][ny] == '#' || fireTime[nx][ny] <= fireTime[cur.x][cur.y] + 1) continue;
-
-                fireTime[nx][ny] = fireTime[cur.x][cur.y] + 1;
-                fireQ.add(new Point(nx, ny));
-            }
-        }
-    }
-
-    // 구름이 탈출 BFS (최대 시간 계산)
-    static int escapeGoorm() {
-        goormQ.add(start);
-        int maxTime = -1;
-
-        while (!goormQ.isEmpty()) {
-            Point cur = goormQ.poll();
-
-            // 현재 위치에서 탈출 가능한지 확인
-            boolean canEscape = checkEscape(cur.x, cur.y, goormTime[cur.x][cur.y]);
-            if (canEscape) {
-                maxTime = Math.max(maxTime, goormTime[cur.x][cur.y]);
-                continue; // 더 이상 이동 불필요
-            }
-
-            // 이동 가능한 칸 탐색
-            for (int d = 0; d < 4; d++) {
-                int nx = cur.x + dx[d];
-                int ny = cur.y + dy[d];
-
-                if (nx < 0 || nx >= R || ny < 0 || ny >= C) continue;
-                if (map[nx][ny] == '#' || goormTime[nx][ny] != -1) continue;
-
-                // 불보다 늦게 도착하면 이동 불가
-                if (fireTime[nx][ny] <= goormTime[cur.x][cur.y] + 1) continue;
-
-                goormTime[nx][ny] = goormTime[cur.x][cur.y] + 1;
-                goormQ.add(new Point(nx, ny));
+                // 범위를 벗어나지 않고, 방문하지 않은 빈 칸만 처리
+                if (ni >= 0 && ni < R && nj >= 0 && nj < C && S[ni].charAt(nj) != '#' && !visited[ni][nj]) {
+                    visited[ni][nj] = true;
+                    dist[ni][nj] = dist[i][j] + 1;
+                    dq.addLast(new int[]{ni, nj}); // 다음 위치를 덱에 추가
+                }
             }
         }
 
-        return maxTime;
-    }
+        // 구름이 위치에서 결과 출력
+        boolean foundCloud = false; // 구름을 찾았는지 여부
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (S[i].charAt(j) == '&') { // 구름이 있는 칸
+                    foundCloud = true;
 
-    // 탈출 조건 확인
-    static boolean checkEscape(int x, int y, int time) {
-        // 1. 연구실 경계에 도달한 경우
-        if (x == 0 || x == R-1 || y == 0 || y == C-1) return true;
-
-        // 2. 인접 칸에 불이 time+1 시간에 도달하는 경우
-        for (int d = 0; d < 4; d++) {
-            int nx = x + dx[d];
-            int ny = y + dy[d];
-            if (nx < 0 || nx >= R || ny < 0 || ny >= C) continue;
-            if (fireTime[nx][ny] <= time + 1) return true;
+                    // 구름이 있는 칸에 불이 도달하지 못했을 경우
+                    if (!visited[i][j]) {
+                        System.out.println(-1);
+                    } else {
+                        // 불이 도달한 경우, 거리 -1 을 출력
+                        System.out.println(dist[i][j] - 1);
+                    }
+                    break;
+                }
+            }
+            if (foundCloud) break; // 구름을 찾으면 더 이상 반복하지 않음
         }
-
-        return false;
     }
 }
