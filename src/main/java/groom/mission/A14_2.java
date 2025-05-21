@@ -20,11 +20,11 @@ public class A14_2 {
         for (int i = 0; i < n; i++) {
             String[] input = br.readLine().split(" ");
             // 외계인 x 좌표
-            x[i] = Integer.parseInt(input[0]);
+            x[i] = Long.parseLong(input[0]);
             // 외계인 y 좌표
-            y[i] = Integer.parseInt(input[1]);
+            y[i] = Long.parseLong(input[1]);
             // 미사일 발표 시각
-            l[i] = Integer.parseInt(input[2]);
+            l[i] = Long.parseLong(input[2]);
 
         }
 
