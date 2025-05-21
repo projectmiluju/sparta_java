@@ -2,6 +2,7 @@ package groom.mission;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.PriorityQueue;
 
 public class A14_2 {
     public static void main(String[] args) throws Exception {
@@ -27,5 +28,44 @@ public class A14_2 {
 
         }
 
+        for (int i = 0; i < n; i++) {
+            r[i] = l[i] + (x[i]*x[i] + y[i]*y[i])*2;
+        }
+
+        PriorityQueue<long[]> pq = new PriorityQueue<>(
+                (a, b) -> {
+                    if (a[0] == b[0]) {
+                        return Long.compare(a[1], b[1]);
+                    }
+                    return Long.compare(a[0], b[0]);
+                }
+        );
+
+        for (int i = 0; i < n; i++) {
+            pq.add(new long[]{l[i], 1});
+            pq.add(new long[]{r[i], 0});
+        }
+
+        int cnt = 0;
+        int res = 0;
+
+        while (!pq.isEmpty()) {
+            long[] cur = pq.poll();
+            long time = cur[0];
+            if (cur[1] == 1) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+            res = Math.max(res, cnt);
+        }
+
+        long answer = 0;
+        for (int i = 0; i < n; i++) {
+            answer += r[i] - l[i];
+        }
+        answer -= res;
+
+        System.out.println(answer);
     }
 }
